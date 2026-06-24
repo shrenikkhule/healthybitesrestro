@@ -9,7 +9,7 @@ import {
 import { CartProvider } from "./context/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
 import { Navbar } from "./components/Navbar";
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "./pages/Homepage/HomePage";
 import { MenuPage } from "./pages/MenuPage";
 import { AboutPage } from "./pages/AboutPage";
 
