@@ -1,6 +1,3 @@
-{
-  /* ── HERO ───────────────────────────────────────────────────────── */
-}
 import React from "react";
 import { restaurantInfo } from "../../data/MenuItem";
 

@@ -1,7 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MenuCard } from "../../components/MenuCard";
 import { popularItems, restaurantInfo, whyChooseUs } from "../../data/MenuItem";
 import HeroSection from "./HeroSection";
+import { BsEnvelopeFill, BsGeoAltFill, BsTelephoneFill } from "react-icons/bs";
+import { MdAccessTimeFilled } from "react-icons/md";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
 // ── SPICE METER ───────────────────────────────────────────────────────────────
 function SpiceMeter({ level = 2 }) {
@@ -41,6 +44,37 @@ function Toast({ msg, visible }) {
       }}
     >
       {msg}
+    </div>
+  );
+}
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────────
+function Reveal({ children, delay = 0, style = {} }) {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVis(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.08 },
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: vis ? 1 : 0,
+        transform: vis ? "translateY(0px)" : "translateY(30px)",
+        transition: `opacity .6s cubic-bezier(.22,1,.36,1) ${delay}ms, transform .6s cubic-bezier(.22,1,.36,1) ${delay}ms`,
+        ...style,
+      }}
+    >
+      {children}
     </div>
   );
 }
@@ -569,121 +603,173 @@ export function HomePage({ setTab }) {
       </div>
 
       {/* ── CONTACT ────────────────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 20px" }}>
-        <div style={{ textAlign: "center", marginBottom: 36 }}>
-          <p
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: "#F97316",
-              letterSpacing: "1.5px",
-              textTransform: "uppercase",
-            }}
-          >
-            FIND US
-          </p>
-          <h2
-            className="dh-playfair"
-            style={{
-              fontWeight: 800,
-              fontSize: 28,
-              color: "#1F2937",
-              marginTop: 4,
-            }}
-          >
-            Visit or Order
-          </h2>
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
-            gap: 18,
-          }}
-        >
-          {[
-            { icon: "📍", title: "Address", val: restaurantInfo.address },
-            { icon: "📞", title: "Phone", val: restaurantInfo.phone },
-            { icon: "✉️", title: "Email", val: restaurantInfo.email },
-            {
-              icon: "⏰",
-              title: "Hours",
-              val: `${restaurantInfo.openTime} – ${restaurantInfo.closeTime} (Daily)`,
-            },
-          ].map((c) => (
-            <div
-              key={c.title}
+      {/* ── CONTACT ──────────────────────────────────────────────────── */}
+      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "72px 20px" }}>
+        <Reveal>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p
               style={{
-                background: "#fff",
-                borderRadius: 16,
-                padding: 20,
-                border: "1.5px solid rgba(249,115,22,.12)",
-                display: "flex",
-                gap: 14,
-                alignItems: "flex-start",
-                boxShadow: "0 2px 12px rgba(249,115,22,.07)",
+                fontSize: 11,
+                fontWeight: 800,
+                color: "#F97316",
+                letterSpacing: "2.5px",
+                textTransform: "uppercase",
+                marginBottom: 8,
               }}
             >
-              <span style={{ fontSize: 24, flexShrink: 0 }}>{c.icon}</span>
-              <div>
-                <p
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 11,
-                    color: "#9ca3af",
-                    marginBottom: 4,
-                    textTransform: "uppercase",
-                    letterSpacing: 0.5,
-                  }}
-                >
-                  {c.title}
-                </p>
-                <p style={{ fontSize: 14, color: "#1F2937", lineHeight: 1.5 }}>
-                  {c.val}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+              Find Us
+            </p>
+            <h2
+              style={{
+                fontFamily: "'Syne',sans-serif",
+                fontWeight: 900,
+                fontSize: 32,
+                color: "#1F2937",
+              }}
+            >
+              Visit or Order
+            </h2>
+          </div>
+        </Reveal>
 
         <div
           style={{
-            display: "flex",
-            gap: 10,
-            flexWrap: "wrap",
-            justifyContent: "center",
-            marginTop: 28,
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))",
+            gap: 16,
           }}
         >
           {[
-            ["🟢", "WhatsApp"],
-            ["📘", "Facebook"],
-            ["📸", "Instagram"],
-            ["📺", "YouTube"],
-          ].map(([e, n]) => (
-            <a
-              key={n}
-              href="#"
-              className="dh-social"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                background: "#fff",
-                border: "1.5px solid rgba(249,115,22,.2)",
-                borderRadius: 10,
-                padding: "8px 14px",
-                textDecoration: "none",
-                color: "#374151",
-                fontSize: 13,
-                fontWeight: 600,
-                transition: "all .2s",
-              }}
-            >
-              {e} {n}
-            </a>
+            {
+              icon: <BsGeoAltFill size={17} color="#F97316" />,
+              title: "Address",
+              val: restaurantInfo.address,
+            },
+            {
+              icon: <BsTelephoneFill size={17} color="#F97316" />,
+              title: "Phone",
+              val: restaurantInfo.phone,
+            },
+            {
+              icon: <BsEnvelopeFill size={17} color="#F97316" />,
+              title: "Email",
+              val: restaurantInfo.email,
+            },
+            {
+              icon: <MdAccessTimeFilled size={17} color="#F97316" />,
+              title: "Hours",
+              val: `${restaurantInfo.openTime} – ${restaurantInfo.closeTime} (Daily)`,
+            },
+          ].map((c, i) => (
+            <Reveal key={c.title} delay={i * 60}>
+              <div
+                className="dhv-contact-card"
+                style={{
+                  background: "#fff",
+                  borderRadius: 18,
+                  padding: "20px",
+                  display: "flex",
+                  gap: 14,
+                  alignItems: "flex-start",
+                  border: "1.5px solid rgba(249,115,22,.1)",
+                  boxShadow: "0 2px 16px rgba(249,115,22,.06)",
+                }}
+              >
+                <div
+                  style={{
+                    width: 42,
+                    height: 42,
+                    borderRadius: 13,
+                    background: "#FFF7ED",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    border: "1px solid rgba(249,115,22,.15)",
+                  }}
+                >
+                  {c.icon}
+                </div>
+                <div>
+                  <p
+                    style={{
+                      fontWeight: 800,
+                      fontSize: 10,
+                      color: "#d1d5db",
+                      marginBottom: 5,
+                      textTransform: "uppercase",
+                      letterSpacing: 1,
+                    }}
+                  >
+                    {c.title}
+                  </p>
+                  <p
+                    style={{ fontSize: 14, color: "#374151", lineHeight: 1.55 }}
+                  >
+                    {c.val}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
           ))}
         </div>
+
+        <Reveal delay={200}>
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginTop: 36,
+            }}
+          >
+            {[
+              {
+                icon: <FaWhatsapp size={16} />,
+                label: "WhatsApp",
+                accent: "#22C55E",
+              },
+              {
+                icon: <FaFacebookF size={14} />,
+                label: "Facebook",
+                accent: "#3B82F6",
+              },
+              {
+                icon: <FaInstagram size={14} />,
+                label: "Instagram",
+                accent: "#ec4899",
+              },
+              {
+                icon: <FaYoutube size={16} />,
+                label: "YouTube",
+                accent: "#ef4444",
+              },
+            ].map(({ icon, label, accent }) => (
+              <a
+                key={label}
+                href="#"
+                className="dhv-social"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#fff",
+                  border: "1.5px solid rgba(249,115,22,.18)",
+                  borderRadius: 12,
+                  padding: "10px 18px",
+                  textDecoration: "none",
+                  color: "#374151",
+                  fontSize: 13,
+                  fontWeight: 700,
+                  boxShadow: "0 2px 12px rgba(0,0,0,.04)",
+                }}
+              >
+                <span style={{ color: accent }}>{icon}</span> {label}
+              </a>
+            ))}
+          </div>
+        </Reveal>
       </div>
 
       {/* ── FOOTER ─────────────────────────────────────────────────────── */}
