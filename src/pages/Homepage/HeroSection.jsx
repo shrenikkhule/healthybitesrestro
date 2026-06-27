@@ -9,7 +9,7 @@ function HeroSection() {
     const words = [
       "Taste That Keeps You Coming Back!",
       "Soya Chaap That Wins Hearts!",
-      "Delhi's Special Soya Chaap - Pure Veg",
+      "Delhi's Special Soya Chaap.",
     ];
 
     let i = 0;
@@ -121,10 +121,10 @@ function HeroSection() {
           }}
         />
 
-        <div className="w-full h-full flex justify-center items-center mb-10 text-white">
+        <div className="w-full h-full flex justify-center items-center m-5 text-white">
           <h2 ref={typewriterRef} className="text-xl font-bold"></h2>
         </div>
-        <p
+        {/* <p
           style={{
             fontSize: 13,
             color: "rgba(255,255,255,.5)",
@@ -132,7 +132,7 @@ function HeroSection() {
           }}
         >
           🌶 Freshly Spiced · 🧄 Aromatic Masalas · 🔥 Char-Grilled Perfection
-        </p>
+        </p> */}
 
         <div
           style={{
