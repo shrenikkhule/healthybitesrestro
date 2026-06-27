@@ -177,7 +177,7 @@ export function Navbar() {
           style={{
             maxWidth: 1120,
             margin: "0 auto",
-            padding: "0 20px",
+            padding: "0 6px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
