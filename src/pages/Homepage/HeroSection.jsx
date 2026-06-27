@@ -45,7 +45,6 @@ function HeroSection() {
             border: "1.5px solid rgba(34,197,94,.4)",
             borderRadius: 30,
             padding: "6px 16px",
-            marginBottom: 20,
           }}
         >
           <span
@@ -69,7 +68,7 @@ function HeroSection() {
           </span>
         </div>
 
-        <h1
+        {/* <h1
           className="dh-playfair"
           style={{
             fontWeight: 900,
@@ -87,8 +86,17 @@ function HeroSection() {
           >
             Burns Good
           </span>
-        </h1>
-
+        </h1> */}
+        <img
+          src="/healthy.png"
+          alt="Dhanvi's logo"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
         <p
           style={{
             fontSize: "clamp(15px,2.5vw,19px)",
