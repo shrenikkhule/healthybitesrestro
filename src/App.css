@@ -1,1 +1,11 @@
-@import "tailwindcss";
+import React from 'react';
+
+const App = () => {
+  return (
+    <div>
+      {/* This file is kept for reference. The actual App component is in App.jsx */}
+    </div>
+  );
+};
+
+export default App;
