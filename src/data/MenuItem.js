@@ -1,7 +1,7 @@
 export const restaurantInfo = {
   name: "Dhanvi's Eat Healthy Bites",
   tagline: "Delhi's Special Soya Chaap - Pure Veg",
-  address: "Shop No. 14, Green Market, Lajpat Nagar, New Delhi - 110024",
+  address: "oppisite to swad restaurant, kranti chowk, Sambhajinagar",
   phone: "+91 9665 991315",
   email: "ravigawande@gmail.com",
   openTime: "05:00 PM",
