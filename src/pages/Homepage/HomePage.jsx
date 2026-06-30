@@ -4,7 +4,12 @@ import { popularItems, restaurantInfo, whyChooseUs } from "../../data/MenuItem";
 import HeroSection from "./HeroSection";
 import { BsEnvelopeFill, BsGeoAltFill, BsTelephoneFill } from "react-icons/bs";
 import { MdAccessTimeFilled } from "react-icons/md";
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp,
+  FaYoutube,
+} from "react-icons/fa";
 
 // ── SPICE METER ───────────────────────────────────────────────────────────────
 function SpiceMeter({ level = 2 }) {
@@ -88,8 +93,6 @@ export function HomePage({ setTab }) {
   const menuRef = useRef(null);
   const toastTimer = useRef(null);
 
-  const hour = new Date().getHours();
-  const isOpen = hour >= 10 && hour < 22;
   const totalQty = Object.values(cart).reduce((a, b) => a + b, 0);
 
   function showToast(msg) {
@@ -120,8 +123,8 @@ export function HomePage({ setTab }) {
   const CATS = [
     { id: "all", label: "🍽 All" },
     { id: "chaap", label: "🥩 Soya Chaap" },
-    { id: "roll", label: "🌯 Rolls" },
-    { id: "snack", label: "🍟 Snacks" },
+    { id: "roll", label: "🌯 Panner Chaap" },
+    { id: "snack", label: "🍟 Mix Chaap (soya & panner)" },
     { id: "drink", label: "🥤 Drinks" },
   ];
 
@@ -163,126 +166,6 @@ export function HomePage({ setTab }) {
 
       {/* ── HERO ───────────────────────────────────────────────────────── */}
       <HeroSection />
-
-      {/* ── TICKER ─────────────────────────────────────────────────────── */}
-      <div
-        style={{ background: "#F97316", overflow: "hidden", padding: "10px 0" }}
-      >
-        <div
-          className="dh-marquee"
-          style={{
-            display: "flex",
-            width: "max-content",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {[...Array(2)].map((_, ri) => (
-            <div key={ri} style={{ display: "flex" }}>
-              {[
-                "🔥 SPICY CHAAP LOADED WITH MASALA",
-                "🌶 EXTRA CHILLI ON REQUEST",
-                "🍋 FRESH SQUEEZED LIME ON EVERYTHING",
-                "🧄 SECRET GARLIC SAUCE",
-                "✅ 100% PURE VEG CERTIFIED",
-                "🛵 FREE DELIVERY ABOVE ₹299",
-                "⚡ ORDER VIA WHATSAPP",
-              ].map((t) => (
-                <span
-                  key={t}
-                  style={{
-                    color: "#fff",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    padding: "0 24px",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    letterSpacing: 0.5,
-                  }}
-                >
-                  {t}{" "}
-                  <span
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: "50%",
-                      background: "rgba(255,255,255,.4)",
-                      display: "inline-block",
-                    }}
-                  />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── STATUS BAR ─────────────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: 20,
-            padding: "16px 24px",
-            marginTop: -28,
-            boxShadow: "0 8px 40px rgba(249,115,22,.15)",
-            border: "1.5px solid rgba(249,115,22,.2)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: 12,
-            position: "relative",
-            zIndex: 10,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: "50%",
-                display: "inline-block",
-                background: isOpen ? "#22C55E" : "#ef4444",
-                boxShadow: isOpen ? "0 0 0 4px rgba(34,197,94,.2)" : "none",
-              }}
-            />
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: 15,
-                color: isOpen ? "#15803d" : "#dc2626",
-              }}
-            >
-              {isOpen ? "Open Now" : "Closed"}
-            </span>
-          </div>
-          <span style={{ fontSize: 13, color: "#6b7280" }}>
-            ⏰ {restaurantInfo.openTime} – {restaurantInfo.closeTime}
-          </span>
-          <span style={{ fontSize: 13, color: "#22C55E", fontWeight: 600 }}>
-            🛵 Free delivery above ₹299
-          </span>
-          <span style={{ fontSize: 13, color: "#6b7280" }}>
-            📞 {restaurantInfo.phone}
-          </span>
-          <button
-            onClick={() => showToast("Opening WhatsApp... 💬")}
-            style={{
-              background: "#22C55E",
-              color: "#fff",
-              border: "none",
-              borderRadius: 10,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
-            Order on WhatsApp
-          </button>
-        </div>
-      </div>
 
       {/* ── POPULAR / MENU SECTION ─────────────────────────────────────── */}
       <div
