@@ -4,7 +4,12 @@ import { popularItems, restaurantInfo, whyChooseUs } from "../../data/MenuItem";
 import HeroSection from "./HeroSection";
 import { BsEnvelopeFill, BsGeoAltFill, BsTelephoneFill } from "react-icons/bs";
 import { MdAccessTimeFilled } from "react-icons/md";
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp,
+  FaYoutube,
+} from "react-icons/fa";
 
 // ── SPICE METER ───────────────────────────────────────────────────────────────
 function SpiceMeter({ level = 2 }) {
@@ -120,8 +125,8 @@ export function HomePage({ setTab }) {
   const CATS = [
     { id: "all", label: "🍽 All" },
     { id: "chaap", label: "🥩 Soya Chaap" },
-    { id: "roll", label: "🌯 Rolls" },
-    { id: "snack", label: "🍟 Snacks" },
+    { id: "roll", label: "🌯 Panner Chaap" },
+    { id: "snack", label: "🍟 Mix Chaap (soya & panner)" },
     { id: "drink", label: "🥤 Drinks" },
   ];
 

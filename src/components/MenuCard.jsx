@@ -1,138 +1,120 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
+import { FiShoppingCart, FiCheck } from "react-icons/fi";
+import { IoLeafOutline } from "react-icons/io5";
+import { HiOutlineFire } from "react-icons/hi";
+import { RiAwardLine, RiStarSFill } from "react-icons/ri";
+
 export function MenuCard({ item, delay = 0 }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
+
   const handleAdd = () => {
     addItem(item);
     setAdded(true);
     setTimeout(() => setAdded(false), 1200);
   };
+
+  const tagConfig = {
+    Bestseller: {
+      icon: <HiOutlineFire className="w-3 h-3" />,
+      style: "bg-emerald-500 text-white",
+    },
+    "Chef's Pick": {
+      icon: <RiAwardLine className="w-3 h-3" />,
+      style: "bg-orange-500 text-white",
+    },
+    New: {
+      icon: null,
+      style: "bg-yellow-400 text-yellow-900",
+    },
+  };
+
+  const tag = item.tag ? tagConfig[item.tag] : null;
+
   return (
     <div
-      className="card-hover fade-up"
-      style={{
-        background: "#fff",
-        borderRadius: 20,
-        overflow: "hidden",
-        border: "1.5px solid rgba(34,197,94,.15)",
-        boxShadow: "0 2px 16px rgba(34,197,94,.08)",
-        animationDelay: `${delay}ms`,
-      }}
+      className="group relative flex flex-col rounded-2xl overflow-hidden bg-white border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-out"
+      style={{ animationDelay: `${delay}ms` }}
     >
-      <div
-        style={{
-          background: "linear-gradient(135deg,#DCFCE7,#FFF7ED)",
-          height: 120,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 52,
-          position: "relative",
-        }}
-      >
-        {item.img}
-        {item.tag && (
+      {/* Image area */}
+      <div className="relative h-44 bg-gradient-to-br from-emerald-50 to-orange-50 overflow-hidden">
+        <img
+          src=""
+          alt={item.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        />
+
+        {/* Veg badge */}
+        <span className="absolute top-3 right-3 flex items-center gap-1 bg-white/90 backdrop-blur-sm text-emerald-600 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm border border-emerald-100">
+          <IoLeafOutline className="w-3 h-3" />
+          VEG
+        </span>
+
+        {/* Tag badge */}
+        {tag && (
           <span
-            style={{
-              position: "absolute",
-              top: 10,
-              left: 10,
-              background:
-                item.tag === "Bestseller"
-                  ? "#22C55E"
-                  : item.tag === "Chef's Pick"
-                    ? "#F97316"
-                    : "#FACC15",
-              color:
-                item.tag === "Chef's Pick" || item.tag === "Bestseller"
-                  ? "#fff"
-                  : "#78350f",
-              fontSize: 10,
-              fontWeight: 700,
-              padding: "3px 8px",
-              borderRadius: 20,
-            }}
+            className={`absolute top-3 left-3 flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm ${tag.style}`}
           >
+            {tag.icon}
             {item.tag}
           </span>
         )}
-        <span
-          className="tag-veg"
-          style={{ position: "absolute", top: 10, right: 10 }}
-        >
-          🟢 VEG
-        </span>
+
+        {/* Shimmer overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      <div style={{ padding: "14px 16px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            marginBottom: 4,
-          }}
-        >
-          <h3
-            style={{
-              fontWeight: 700,
-              fontSize: 15,
-              color: "#1F2937",
-              lineHeight: 1.3,
-              flex: 1,
-              paddingRight: 8,
-            }}
-          >
+
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-4 gap-2">
+        {/* Name + Price */}
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-bold text-[15px] text-gray-800 leading-snug flex-1">
             {item.name}
           </h3>
-          <span
-            style={{
-              fontWeight: 800,
-              fontSize: 16,
-              color: "#22C55E",
-              flexShrink: 0,
-            }}
-          >
+          <span className="font-extrabold text-[16px] text-emerald-500 shrink-0">
             ₹{item.price}
           </span>
         </div>
-        <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 2 }}>
+
+        {/* Category */}
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-orange-400">
           {item.category}
         </p>
-        <p
-          style={{
-            fontSize: 12,
-            color: "#6b7280",
-            lineHeight: 1.5,
-            marginBottom: 10,
-            height: 36,
-            overflow: "hidden",
-          }}
-        >
+
+        {/* Description */}
+        <p className="text-[12px] text-gray-500 leading-relaxed line-clamp-2 flex-1">
           {item.desc}
         </p>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span style={{ fontSize: 12, color: "#374151" }}>
-            ⭐ {item.rating}{" "}
-            <span style={{ color: "#9ca3af" }}>({item.reviews})</span>
+
+        {/* Rating + CTA */}
+        <div className="flex items-center justify-between pt-1 mt-auto">
+          <span className="flex items-center gap-1 text-[12px] text-gray-700 font-medium">
+            <RiStarSFill className="w-4 h-4 text-yellow-400" />
+            {item.rating}
+            <span className="text-gray-400 font-normal">({item.reviews})</span>
           </span>
+
           <button
             onClick={handleAdd}
-            className={added ? "btn-orange" : "btn-primary"}
-            style={{
-              padding: "7px 14px",
-              borderRadius: 10,
-              fontSize: 12,
-              transition: "all .2s",
-            }}
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-[12px] font-bold transition-all duration-200 shadow-sm active:scale-95
+              ${
+                added
+                  ? "bg-emerald-500 text-white shadow-emerald-200"
+                  : "bg-orange-500 hover:bg-orange-600 text-white shadow-orange-200"
+              }`}
           >
-            {added ? "✓ Added!" : "+ Add"}
+            {added ? (
+              <>
+                <FiCheck className="w-3.5 h-3.5" />
+                Added!
+              </>
+            ) : (
+              <>
+                <FiShoppingCart className="w-3.5 h-3.5" />
+                Add
+              </>
+            )}
           </button>
         </div>
       </div>
