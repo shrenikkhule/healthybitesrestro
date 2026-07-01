@@ -276,7 +276,7 @@ function HeroSection() {
           {/* Free delivery */}
           <div className="flex items-center gap-1.5 text-green-600 font-semibold text-xs sm:text-sm order-4 sm:order-3">
             <FaMotorcycle className="text-green-500 animate-bounce" />
-            <span>Free delivery above ₹299</span>
+            <span>Free delivery above ₹599</span>
           </div>
 
           {/* Phone */}
@@ -291,7 +291,7 @@ function HeroSection() {
           {/* WhatsApp button */}
           <a
             href={`https://wa.me/${restaurantInfo.phone.replace(/\D/g, "")}?text=${encodeURIComponent(
-              "Hi! I'd like to place an order 🍽",
+              "Hi Ravi! I'd like to place an order 🍽",
             )}`}
             target="_blank"
             rel="noopener noreferrer"

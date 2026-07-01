@@ -10,6 +10,9 @@ import {
   FaWhatsapp,
   FaYoutube,
 } from "react-icons/fa";
+import ScrollCards from "./ScrollCards";
+import { Link } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 // ── SPICE METER ───────────────────────────────────────────────────────────────
 function SpiceMeter({ level = 2 }) {
@@ -87,7 +90,7 @@ function Reveal({ children, delay = 0, style = {} }) {
 // ── HOME PAGE ─────────────────────────────────────────────────────────────────
 export function HomePage({ setTab }) {
   const [cart, setCart] = useState({});
-  const [activeCat, setActiveCat] = useState("all");
+
   const [toast, setToast] = useState({ msg: "", visible: false });
   const [codeCopied, setCodeCopied] = useState(false);
   const menuRef = useRef(null);
@@ -119,21 +122,6 @@ export function HomePage({ setTab }) {
     showToast("Code SPICY20 copied! 🎉");
     setTimeout(() => setCodeCopied(false), 3000);
   }
-
-  const CATS = [
-    { id: "all", label: "🍽 All" },
-    { id: "chaap", label: "🥩 Soya Chaap" },
-    { id: "roll", label: "🌯 Panner Chaap" },
-    { id: "snack", label: "🍟 Mix Chaap (soya & panner)" },
-    { id: "drink", label: "🥤 Drinks" },
-  ];
-
-  // popularItems from your data — filter by cat if item has a `cat` field,
-  // otherwise just show all when "all" is selected
-  const filtered =
-    activeCat === "all"
-      ? popularItems
-      : popularItems.filter((i) => i.cat === activeCat);
 
   return (
     <>
@@ -225,80 +213,27 @@ export function HomePage({ setTab }) {
           </span>
         </div>
 
-        {/* category pills */}
-        <div
-          style={{
-            display: "flex",
-            gap: 10,
-            flexWrap: "wrap",
-            margin: "24px 0",
-          }}
-        >
-          {CATS.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setActiveCat(c.id)}
-              className={activeCat !== c.id ? "dh-catbtn" : ""}
-              style={{
-                padding: "8px 18px",
-                borderRadius: 30,
-                fontSize: 13,
-                fontWeight: 600,
-                cursor: "pointer",
-                border:
-                  activeCat === c.id
-                    ? "2px solid #F97316"
-                    : "2px solid rgba(249,115,22,.2)",
-                background: activeCat === c.id ? "#F97316" : "#fff",
-                color: activeCat === c.id ? "#fff" : "#374151",
-                transition: "all .2s",
-              }}
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
-
-        {/* cards grid — uses your existing MenuCard component */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill,minmax(240px,1fr))",
-            gap: 20,
-            marginBottom: 48,
-          }}
-        >
-          {filtered.map((item, i) => (
-            <div
-              key={item.id}
-              className="dh-card"
-              style={{
-                animationDelay: `${i * 80}ms`,
-                transition: "transform .25s, box-shadow .25s",
-              }}
-            >
-              <MenuCard item={item} delay={i * 80} />
-            </div>
-          ))}
-        </div>
+        <ScrollCards />
 
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <button
-            onClick={() => setTab("MENU")}
-            className="dh-pulse"
-            style={{
-              background: "#F97316",
-              color: "#fff",
-              border: "none",
-              borderRadius: 12,
-              padding: "12px 28px",
-              fontSize: 14,
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
-            View Full Menu →
-          </button>
+          <Link to={"/menu"}>
+            <button
+              onClick={() => setTab("MENU")}
+              className="dh-pulse"
+              style={{
+                background: "#F97316",
+                color: "#fff",
+                border: "none",
+                borderRadius: 12,
+                padding: "12px 28px",
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: "pointer",
+              }}
+            >
+              View Full Menu →
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -656,155 +591,7 @@ export function HomePage({ setTab }) {
       </div>
 
       {/* ── FOOTER ─────────────────────────────────────────────────────── */}
-      <footer
-        style={{
-          background: "#1F2937",
-          color: "rgba(255,255,255,.75)",
-          padding: "48px 20px 24px",
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
-              gap: 32,
-              marginBottom: 32,
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 14,
-                }}
-              >
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: 10,
-                    background: "linear-gradient(135deg,#22C55E,#16a34a)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 20,
-                  }}
-                >
-                  🌿
-                </div>
-                <div>
-                  <p
-                    className="dh-playfair"
-                    style={{ fontWeight: 800, fontSize: 14, color: "#fff" }}
-                  >
-                    Dhanvi's
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 10,
-                      color: "#22C55E",
-                      fontWeight: 700,
-                      letterSpacing: 1,
-                    }}
-                  >
-                    EAT HEALTHY BITES
-                  </p>
-                </div>
-              </div>
-              <p
-                style={{
-                  fontSize: 13,
-                  color: "rgba(255,255,255,.45)",
-                  lineHeight: 1.7,
-                }}
-              >
-                {restaurantInfo.tagline}. Fresh, healthy, and pure vegetarian
-                food made with love and fire.
-              </p>
-            </div>
-            <div>
-              <p
-                style={{
-                  fontWeight: 700,
-                  fontSize: 13,
-                  color: "#fff",
-                  marginBottom: 14,
-                }}
-              >
-                Quick Links
-              </p>
-              {["Home", "Menu", "About Us", "Contact"].map((l) => (
-                <p
-                  key={l}
-                  className="dh-footlink"
-                  style={{
-                    fontSize: 13,
-                    color: "rgba(255,255,255,.45)",
-                    marginBottom: 8,
-                    cursor: "pointer",
-                    transition: "color .2s",
-                  }}
-                >
-                  {l}
-                </p>
-              ))}
-            </div>
-            <div>
-              <p
-                style={{
-                  fontWeight: 700,
-                  fontSize: 13,
-                  color: "#fff",
-                  marginBottom: 14,
-                }}
-              >
-                Contact
-              </p>
-              <p
-                style={{
-                  fontSize: 13,
-                  color: "rgba(255,255,255,.45)",
-                  marginBottom: 6,
-                }}
-              >
-                {restaurantInfo.address}
-              </p>
-              <p
-                style={{
-                  fontSize: 13,
-                  color: "rgba(255,255,255,.45)",
-                  marginBottom: 6,
-                }}
-              >
-                {restaurantInfo.phone}
-              </p>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,.45)" }}>
-                {restaurantInfo.email}
-              </p>
-            </div>
-          </div>
-          <div
-            style={{
-              borderTop: "1px solid rgba(255,255,255,.1)",
-              paddingTop: 20,
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: 8,
-            }}
-          >
-            <p style={{ fontSize: 12, color: "rgba(255,255,255,.3)" }}>
-              © 2024 Dhanvi's Eat Healthy Bites. All rights reserved.
-            </p>
-            <p style={{ fontSize: 12, color: "rgba(255,255,255,.3)" }}>
-              Made with 🔥 in Delhi
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* ── FLOATING CART ──────────────────────────────────────────────── */}
       {totalQty > 0 && (
