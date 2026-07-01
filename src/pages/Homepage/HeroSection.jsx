@@ -236,7 +236,7 @@ function HeroSection() {
 
       {/* ── STATUS BAR ─────────────────────────────────────────────────── */}
       {/* ── STATUS BAR ─────────────────────────────────────────────────── */}
-      <div className="max-w-[1100px] mx-auto px-4 sm:px-5">
+      <div className="max-w-275 mx-auto px-4 sm:px-5">
         <div
           className="relative z-10 -mt-7 sm:-mt-9 bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl
                border border-orange-200/60 shadow-[0_8px_40px_rgba(249,115,22,0.2)]
@@ -295,7 +295,7 @@ function HeroSection() {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="order-2 sm:order-5 group flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600
+            className="order-2 sm:order-5 group flex items-center gap-2 bg-linear-to-r from-green-500 to-green-600
                  hover:from-green-600 hover:to-green-700 text-white font-bold text-xs sm:text-sm
                  rounded-xl px-4 py-2.5 sm:px-5 sm:py-2.5 shadow-md shadow-green-500/30
                  hover:shadow-lg hover:shadow-green-500/40 hover:scale-105 active:scale-95

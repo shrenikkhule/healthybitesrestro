@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 export function MenuCard({ item, delay = 0 }) {
+  
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
+
   const handleAdd = () => {
     addItem(item);
     setAdded(true);

@@ -58,7 +58,7 @@ function ScrollRow({ title, items }) {
         {items.map((item, i) => (
           <div
             key={`${item.id}-${item.name}`}
-            className="dh-card flex-none snap-start w-[68%] xs:w-[55%] sm:w-[260px] md:w-[250px] lg:w-[240px]"
+            className="dh-card flex-none snap-start w-[68%] xs:w-[55%] sm:w-65 md:w-62.5 lg:w-60"
             style={{
               animationDelay: `${i * 80}ms`,
               transition: "transform .25s, box-shadow .25s",

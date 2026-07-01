@@ -21,15 +21,7 @@ export const restaurantInfo = {
   },
 };
 
-export const categories = [
-  "All",
-  "Soya Chaap",
-  "Rolls",
-  "Sandwiches",
-  "Healthy Bowls",
-  "Beverages",
-  "Combos",
-];
+
 
 export const menuItems = [
   // ── SOYA CHAAP ──────────────────────────────────────────────────────────────

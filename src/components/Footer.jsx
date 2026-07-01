@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-gray-900 text-white/75 overflow-hidden">
       {/* flame gradient top border */}
-      <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-red-600 to-orange-500" />
+      <div className="h-1 w-full bg-linear-to-r from-orange-500 via-red-600 to-orange-500" />
 
       {/* subtle glow accents */}
       <div className="pointer-events-none absolute -top-24 -left-24 w-72 h-72 bg-orange-600/20 rounded-full blur-3xl" />
@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
           <a
             href="#menu"
-            className="group flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-orange-600/20 transition-all active:scale-95 whitespace-nowrap"
+            className="group flex items-center gap-2 bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-orange-600/20 transition-all active:scale-95 whitespace-nowrap"
           >
             Order Now
             <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -75,7 +75,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-gradient-to-br hover:from-orange-500 hover:to-red-600 hover:border-transparent transition-all active:scale-90"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-linear-to-br hover:from-orange-500 hover:to-red-600 hover:border-transparent transition-all active:scale-90"
                 >
                   <Icon size={15} />
                 </a>
